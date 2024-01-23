@@ -1,24 +1,42 @@
-import java.util.*;
+public class Radio implements IRadio {
+    private boolean encendido;
+    private boolean amMode;
+    private double frecuenciaActual;
 
-public class RADIO {
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
+    public Radio() {
+        encendido = false;
+        amMode = true;
+        frecuenciaActual = 530;
+    }
 
-        boolean go = true;
-        String opcion = "";
+    @Override
+    public boolean getState() {
+        return encendido;
+    }
 
-        while (go) {
-            printMenu();
-
-            System.out.println("Ingrese la opción seleccionada: ");
-            opcion = scan.nextLine();
-            System.out.println("");
+    @Override
+    public void togglePowerOffOn() {
+        encendido = !encendido;
+        if (!encendido) {
+            
+            frecuenciaActual = 530;
+            amMode = true;
         }
     }
 
-    // Menú de la radio (para la terminal, no interfaz gráfica)
-    public static void printMenu() {
-        System.out.println("");
-
+    @Override
+    public void toggleAMFM() {
+        if (encendido) {
+            amMode = !amMode;
+            if (amMode) {
+                
+                if (frecuenciaActual < 530 || frecuenciaActual > 1610) {
+                    
+                    frecuenciaActual = 530;
+                }
+            } 
+            
+            }
+        }
     }
-}
+
